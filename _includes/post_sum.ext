@@ -17,7 +17,7 @@
              </div>
            </div>
            </header>
-	   {{ post.content | trucatewords:75 }}
+	   {{ post.content | truncatewords:75 }}
 	   <div><a href="{{ post.url }}"> Read more...</a></div>
 		
            </article>
