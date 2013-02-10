@@ -1,0 +1,26 @@
+           <article class="post">
+           <header class="header">
+           <div class="row-fluid">
+             <div class="span10">
+               <h2 class="title"><a href="{{ post.url }}">
+		       {{ post.title }}
+
+               </a></h2>
+             </div>
+           </div>
+           <div class="row-fluid">
+             <div class="span12">
+               <div>Posted by <span class="author">
+			       {{ post.author }}
+		       </span><span> on {{ post.date | date_to_string }}</span>
+               </div>
+             </div>
+           </div>
+           </header>
+	   {{ post.content | trucatewords:75 }}
+	   <div><a href="{{ post.url }}"> Read more...</a></div>
+		
+           </article>
+	
+	   
+

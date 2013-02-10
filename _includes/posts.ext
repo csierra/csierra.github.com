@@ -1,0 +1,7 @@
+                 {% for post in site.posts %}
+		   {% if post.url != page.url %} 
+		     <div>
+		       <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
+		     </div>
+		   {% endif %}
+                 {% endfor %}
