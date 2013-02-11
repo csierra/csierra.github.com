@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Organizing deployments with arquillian and shrinkwrap"
+title: "Organizing deployments with Arquillian and Shrinkwrap"
 description: "This post shares some of my experiences organizing complex deployments"
 category: 
 tags: [arquillian, shrinkwrap, deployment]
@@ -13,7 +13,7 @@ One of the _promises_ of arquillian is that you can create _real tests_, instead
 
 Sadly, you normally need to configure the runtime to get it to work properly. That usually means a few files, XML or other, that need to be present in order for the test to run properly. Moreover, this is a task that crosses some virtual lines between development and systems administration. 
 
-From my experience its very handy to have one or more separate classes describing the base deployment. This classes will be extended in the test deployment description in order to specify only the logic we want to test.
+From my experience, sometimes its very handy to have one or more separate classes describing the base deployment. This classes will be extended in the test deployment description in order to specify only the logic we want to test.
 
 {% highlight java %}
 public abstract class BaseDeployment {
@@ -33,10 +33,17 @@ public abstract class BaseDeployment {
         war.addAsLibrary(jar);
         ear.addAsModule(war);
 
+        webXml.version("3.0");
+        //A lot of reusable descriptions here
     }
 
+
     public Archive<?> build() {
-        war.setWebXml(new StringAsset(webXml));
+        /* Finally assemble the deployment so we allow web application description extension
+         * from the test */
+        war.setWebXML(new StringAsset(webXml.exportAsString()));
+        
+        // return the actual deployment
         return ear;
     }
 }
@@ -46,12 +53,31 @@ public abstract class BaseDeployment {
 Now, in the test, you can do
 
 {% highlight java %}
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.Archive;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-@XmlRootEntity
+@RunWith(Arquillian.class)
 public class ActualTest {
-
     
+    @Deployment public static Archive<?> getDeployment() {
+        return new BaseDeployment() { {
+            war.addClasses(Number.class);
+            webXml.createServlet().servletClass(Number.class.getName());
+            //Etc...
+        } }.build();
+    }
+    
+    @Test public void test() {
+        //Test code
+    }
 }
 {% endhighlight %}
+
+The design of Arquillian and ShrinkWrap allows us to build our deployments in this way, thus hiding a bit the internals of our deployment and making it a bit more reusable. 
+
+We could even go further and parameterize the deployments or allow only some _extension points_ playing with the visibility of the fields and method we want to expose.
 
 
