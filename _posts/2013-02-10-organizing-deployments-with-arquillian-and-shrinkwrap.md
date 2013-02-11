@@ -46,7 +46,7 @@ public abstract class BaseDeployment {
 Now, in the test, you can do
 
 {% highlight java %}
-@RunWith(Arquillian.class)
+
 public class ActualTest {
 
     
