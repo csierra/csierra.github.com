@@ -47,6 +47,7 @@ Now, in the test, you can do
 
 {% highlight java %}
 
+@XmlRootEntity
 public class ActualTest {
 
     
