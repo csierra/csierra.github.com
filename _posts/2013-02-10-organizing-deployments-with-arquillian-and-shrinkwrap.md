@@ -16,6 +16,16 @@ Sadly, you normally need to configure the runtime to get it to work properly. Th
 From my experience, sometimes its very handy to have one or more separate classes describing the base deployment. This classes will be extended in the test deployment description in order to specify only the logic we want to test.
 
 {% highlight java %}
+
+import org.jboss.shrinkwrap.api.Archive;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.StringAsset;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
+
 public abstract class BaseDeployment {
 
     EnterpriseArchive ear;
