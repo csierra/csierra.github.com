@@ -3,7 +3,7 @@ layout: post
 title: "Organizing deployments with Arquillian and Shrinkwrap"
 description: "This post shares some of my experiences organizing complex deployments"
 category: 
-tags: [arquillian, shrinkwrap, deployment]
+tags: [arquillian, shrinkwrap, deployment, reusable, organize]
 author: Carlos Sierra
 ---
 
