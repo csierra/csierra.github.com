@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Loosely comparing maps using Groovy"
+title: "Loosely test for map equality using Groovy"
 description: ""
 category: posts
-tags: [tests, groovy, hashmaps]
+tags: [test, groovy, hash, map, equality]
 language: en
 author: Carlos Sierra
 ---
