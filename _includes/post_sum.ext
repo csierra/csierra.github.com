@@ -19,6 +19,7 @@
            </header>
 	   {{ post.content | truncatewords:75 }}
 	   <div><a href="{{ post.url }}"> Read more...</a></div>
+	   <div><a href="{{ post.url }}#disqus_thread">Reactions</a></div>
 		
            </article>
 	
