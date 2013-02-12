@@ -1,0 +1,12 @@
+<header class="header">
+    <h3 class="title">About the author</h3>
+</header>
+<div>
+   <a style="text-decoration: none" href="http://twitter.com/csierrandres" target="_NEW"> <img src="/resource/img/twitter-bird-blue-on-white.png" style="width: 32px;"/> @csierrandres </a>
+</div>
+<div style="margin-bottom: 4px">
+   <a style="text-decoration: none" href="http://github.com/csierra" target="_NEW"> <img src="/resource/img/blacktocat-32.png" style="width: 24px; margin-left: 3px; margin-right: 5px; "/> @csierra </a>
+</div>
+<div>
+   <a style="text-decoration: none" href="http://www.linkedin.com/pub/carlos-sierra-andr%C3%A9s/2/623/60a" target="_NEW"> <img src="/resource/img/linkedin.png" style="width: 24px; margin-left: 5px; margin-right: 3px;" /> Carlos Sierra </a>
+</div>
