@@ -1,40 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="description">
-    <meta content="" name="author">
-    <link rel="stylesheet" href="/resource/css/bootstrap.css">
-    <link href="/resource/css/custom.less" type="text/css" rel="stylesheet/less">
-    <script src="/resource/js/jquery.js"></script><script src="/resource/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/resource/js/less.js"></script>
+      {% include header.ext %}
     <title>
       {{ post.title }}
     </title>
-    <script type="text/javascript">
-      (function() {
-       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-       po.src = 'https://apis.google.com/js/plusone.js';
-       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-       })();
-     </script>
-
    </head>
    <body>
-     <div class="navbar navbar-fixed-top">
-       <div class="navbar-inner">
-         <div class="container">
-		 <a href="/" class="brand">{{ site.title }}</a>
-           <div class="nav-collapse">
-             <ul class="nav">
-		{% include sections.ext %}
-
-             </ul>
-           </div>
-         </div>
-       </div>
-     </div>
+       {% include navbar.ext %}
      <div class="container">
        <div class="row">
          <div class="span9">
