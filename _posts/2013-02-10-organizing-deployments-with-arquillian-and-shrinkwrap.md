@@ -13,7 +13,7 @@ One of the _promises_ of arquillian is that you can create _real tests_, instead
 
 Sadly, you normally need to configure the runtime to get it to work properly. That usually means a few files, XML or other, that need to be present in order for the test to run properly. Moreover, this is a task that crosses some virtual lines between development and systems administration. 
 
-From my experience, sometimes its very handy to have one or more separate classes describing the base deployment. This classes will be extended in the test deployment description in order to specify only the logic we want to test.
+From my experience, sometimes its very handy to have one or more separate classes describing the base deployment. These classes will be extended in the test deployment description in order to specify only the logic we want to test.
 
 {% highlight java %}
 
