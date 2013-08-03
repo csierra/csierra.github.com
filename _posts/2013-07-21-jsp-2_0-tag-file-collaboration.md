@@ -81,8 +81,6 @@ and we can define children `panel` tags as the following:
 
 we rely on a couple of tags that collaborate. We can see how this works. `<counter:set>` initializes a counter with a namespace of its own. `<counter:increment>` increments a counter of the given namespace that needs to be present in a parent tag.
 
-For counting the children panel tags we can create two subclasses of `SimpleTagSupport` and make them collaborate using `findAncestorWithClass`. But if we do so we lose the ability of using tag files for specifying the markup. Surely we can use fragments to avoid writing the markup inside the java class, but we do not want the client code to specify some markup that we want to provide as part of the `panel-container` and `panel` tags.
-
 To achieve our purpose we can create a tag pair subclassing `SimpleTagSupport` with the only purpose of collaboration. Then we can make use of these tags inside our tag files to provide the markup. Our `general purpose collaborating tags` should be configurable so we can use them inside different tag files. We can use tag variables for that. 
 
 The tags that subclass `SimpleTagSupport` cannot collaborate using `findAncestorWithClass`, as they are not going to be descendant of each other strictly speaking (as you can see in the example above) but they can communicate using the JSPContext with a proper scope. 
