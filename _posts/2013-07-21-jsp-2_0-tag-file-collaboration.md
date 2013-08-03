@@ -81,7 +81,7 @@ and we can define children `panel` tags as the following:
 
 we rely on a couple of tags that collaborate. We can see how this works. `<counter:set>` initializes a counter with a namespace of its own. `<counter:increment>` increments a counter of the given namespace that needs to be present in a parent tag.
 
-To achieve our purpose we can create a tag pair subclassing `SimpleTagSupport` with the only purpose of collaboration. Then we can make use of these tags inside our tag files to provide the markup. Our `general purpose collaborating tags` should be configurable so we can use them inside different tag files. We can use tag variables for that. 
+To achieve our purpose we can create a tag pair subclassing `SimpleTagSupport` with the only purpose of collaboration. Then we can make use of these tags inside our tag files to provide the markup. Our _general purpose collaborating tags_ should be configurable so we can use them inside different tag files. We can use tag variables for that. 
 
 The tags that subclass `SimpleTagSupport` cannot collaborate using `findAncestorWithClass`, as they are not going to be descendant of each other strictly speaking (as you can see in the example above) but they can communicate using the JSPContext with a proper scope. 
 
@@ -90,26 +90,21 @@ Below you can find a base class holding the logic for this communication:
 {% highlight java %}
 
 package com.bizonos.util;
-
 import javax.servlet.jsp.PageContext;
-
 public class CounterTagSupport extends SimpleTagSupport {
 
     protected void removeRequestAttribute(String name) {
         getJspContext().removeAttribute(
                 name, PageContext.REQUEST_SCOPE);
     }
-
     protected Object getRequestAttribute(String name) {
         return getJspContext().getAttribute(
                 name, PageContext.REQUEST_SCOPE);
     }
-
     protected void setRequestAttribute(String name, Object value) {
         getJspContext().setAttribute(
                 name, value, PageContext.REQUEST_SCOPE);
     }
-
 }
 
 {% endhighlight %}
@@ -125,32 +120,25 @@ import java.io.IOException;
 public class CounterTag extends CounterTagSupport {
     
     private String var;
-
     private Integer parentCounter = null;
     private String namespace = null;
-
     private String counterVarName;
     
     public String getNamespace() {
         return namespace;
     }
-
     public void setNamespace(String namespace) {
         this.namespace = namespace;
         this.counterVarName = namespace + "counter";
     }
-
     public String getVar() {
         return var;
     }
-
     public void setVar(String var) {
         this.var = var;
     }
-    
     @Override
     public void doTag() throws JspException, IOException {
-        
         parentCounter = (Integer)getRequestAttribute(counterVarName);
         setRequestAttribute(counterVarName, 0);
         getJspBody().invoke(null);
@@ -163,7 +151,6 @@ public class CounterTag extends CounterTagSupport {
             removeRequestAttribute(counterVarName);
         }
     }
-    
 }
 
 {% endhighlight %}
@@ -178,18 +165,13 @@ public class CounterIncrement extends CounterTagSupport {
     private String namespace;
     private String counterVarName;
     
-    
     public String getNamespace() {
         return namespace;
     }
-
-
     public void setNamespace(String namespace) {
         this.namespace = namespace;
         this.counterVarName = namespace + "counter";
     }
-    
-
     @Override
     public void doTag() throws JspException, IOException {
         Integer counter = (Integer)getRequestAttribute(counterVarName);
@@ -202,7 +184,7 @@ public class CounterIncrement extends CounterTagSupport {
 
 {% endhighlight %}
 
-We need a tag library descriptor for all this to work:
+We need a tag library descriptor for the variables to work.
 
 {% highlight xml %}
 
@@ -254,3 +236,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
 </taglib>
 
 {% endhighlight %}
+
+You can find a working example of all this [here](https://github.com/csierra/JSP-2.0-children-counter).
+
+Hope this helps!
